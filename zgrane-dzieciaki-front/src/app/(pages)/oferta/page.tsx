@@ -1,43 +1,47 @@
 import { Box } from "@/components/Box";
-import { HeroBanner } from "@/components/HeroBanner";
 import { FaCalendarAlt, FaHandHoldingHeart, FaPhoneAlt } from "react-icons/fa";
 import farbaImage from "../../../assets/Farba.jpg";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function Page() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <HeroBanner
-        image={farbaImage}
-        title="Oferta"
-        subtitle="Profesjonalna pomoc dla Twojego dziecka"
-      />
+      <div className="flex gap-4">
+        <Image
+          src={farbaImage}
+          alt=""
+          className="w-full min-h-full object-cover order-last rounded-xl"
+          width={500}
+          height={200}
+        />
 
-      <Box className="mb-12 bg-gradient-to-r from-blue-500 to-blue-600 text-white transform hover:scale-[1.02] transition-transform">
-        <div className="text-center space-y-4">
-          <h2 className="text-2xl font-bold">
-            ZAPRASZAMY NA ZAJĘCIA TRENINGU UMIEJĘTNOŚCI SPOŁECZNYCH DZIECI W
-            WIEKU 7-8 LAT
-          </h2>
-          <div className="flex items-center justify-center gap-2">
-            <FaCalendarAlt className="text-xl" />
-            <p>
-              Zajęcia będą odbywały się cyklicznie w soboty o stałych godzinach
-              od września do czerwca.
+        <Box className="!bg-blue-500 text-white">
+          <div className="text-center space-y-4">
+            <h2 className="text-2xl font-bold">
+              ZAPRASZAMY NA ZAJĘCIA TRENINGU UMIEJĘTNOŚCI SPOŁECZNYCH DZIECI W
+              WIEKU 7-8 LAT
+            </h2>
+            <div className="flex items-center justify-center gap-2">
+              <FaCalendarAlt className="text-xl" />
+              <p>
+                Zajęcia będą odbywały się cyklicznie w soboty o stałych
+                godzinach od września do czerwca.
+              </p>
+            </div>
+            <p className="font-semibold">
+              Ruszamy w połowie września 2024 roku. Serdecznie zapraszamy!!
             </p>
+            <div className="flex items-center justify-center gap-2 text-lg">
+              <FaPhoneAlt />
+              <p>Zgłoszenia: 691 031 311</p>
+            </div>
           </div>
-          <p className="font-semibold">
-            Ruszamy w połowie września 2024 roku. Serdecznie zapraszamy!!
-          </p>
-          <div className="flex items-center justify-center gap-2 text-lg">
-            <FaPhoneAlt />
-            <p>Zgłoszenia: 691 031 311</p>
-          </div>
-        </div>
-      </Box>
+        </Box>
+      </div>
 
-      <div className="grid md:grid-cols-2 gap-6 mb-12">
-        <Box className="bg-gradient-to-br from-green-50 to-blue-50 transform hover:scale-[1.02] transition-transform">
+      <div className="grid md:grid-cols-2 gap-6 my-12">
+        <Box className="bg-gradient-to-br from-green-50 to-blue-50">
           <FaHandHoldingHeart className="text-4xl text-green-500 mb-4" />
           <h3 className="text-xl font-semibold text-gray-800 mb-4">
             Pomoc diagnostyczno-terapeutyczna
@@ -49,7 +53,7 @@ export default async function Page() {
           </p>
         </Box>
 
-        <Box className="h-full bg-gradient-to-br from-purple-50 to-pink-50 transform hover:scale-[1.02] transition-transform">
+        <Box className="h-full bg-gradient-to-br from-purple-50 to-pink-50">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">
             Obszary wsparcia
           </h3>

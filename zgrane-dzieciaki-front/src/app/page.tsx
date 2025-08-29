@@ -84,7 +84,7 @@ export default async function IndexPage() {
             className="group-hover:shadow-lg group-hover:bg-green-100 rounded-r-xl object-cover max-w-[376px] min-h-[250px]"
           />
         </Link>
-        <Link href="/kontakt" className="flex col-span-1 row-span-1">
+        <Link href="/kontakt#map" className="flex col-span-1 row-span-1">
           <div className="flex flex-col justify-center h-full hover:bg-yellow-100 w-full bg-yellow-50 p-6 rounded-xl hover:shadow-lg transition-all">
             <h2 className="text-xl font-semibold mb-6">
               Centrum Rozwoju Dziecka „Zgrane Dzieciaki”

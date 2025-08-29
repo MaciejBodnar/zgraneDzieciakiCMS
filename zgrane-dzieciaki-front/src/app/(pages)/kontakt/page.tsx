@@ -85,7 +85,9 @@ export default async function Page() {
         />
       </div>
       <ContactForm />
-      <Container />
+      <div id="map">
+        <Container />
+      </div>
     </div>
   );
 }
