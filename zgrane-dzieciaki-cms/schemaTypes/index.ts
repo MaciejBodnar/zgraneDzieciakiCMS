@@ -1,3 +1,5 @@
+import { cennik } from './cennik'
+import { logopedia } from './logopedia'
 import {postType} from './postType'
 
-export const schemaTypes = [postType]
+export const schemaTypes = [postType, logopedia, cennik]

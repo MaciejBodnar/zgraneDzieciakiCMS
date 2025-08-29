@@ -1,58 +1,32 @@
+"use client";
 import Image from "next/image";
 import { FaCheck, FaComments } from "react-icons/fa";
 import logopedaImage from "../../../../assets/Logopeda.png";
+import { useEffect, useState } from "react";
+import { type SanityDocument } from "next-sanity";
+import { client } from "../../../../sanity/client";
 
-export default async function Page() {
+export default function Page() {
   const services = [
     "terapię logopedyczną dla dzieci od 2 roku życia z opóźnieniem rozwoju mowy, wadami wymowy, zaburzeniami rozwoju mowy dostosowaną do wieku i indywidualnych możliwości dziecka",
     "konsultacje logopedyczne dla rodziców mających wątpliwości, co do rozwoju mowy swoich dzieci",
   ];
 
-  const ageGroups = [
-    {
-      age: "2 lat",
-      symptoms: [
-        "nie mówi w ogóle lub posługuje się pojedynczymi słowami, bądź sylabami i wyrażeniami dźwiękonaśladowczymi",
-        "niechętnie nawiązuje kontakt werbalny i wzrokowy",
-        "jego mowa jest niezrozumiała przez otoczenie",
-        "nie rozumie kierowanych do niego prostych poleceń słownych",
-      ],
-    },
-    {
-      age: "3 lat",
-      symptoms: [
-        "wymawia pojedyncze dźwięki lub słowa, nie buduje prostych zdań",
-        "jego wypowiedzi są niezrozumiałe dla otoczenia",
-        "ma niepłynność mowy",
-        "nie rozumie kierowanych do niego poleceń",
-        "przy wymawianiu głosek: t, d, n, l, ś, ź, ć, dź układa język między zębami",
-        "zamiast głosek: k, g wymawia głoski: t, d",
-      ],
-    },
-    {
-      age: "4 lat",
-      symptoms: [
-        "nie posługuje się zdaniem, tylko pojedynczymi słowami",
-        "nie rozumie poleceń słownych",
-        "nie wymawia głosek: l, f, w, k, g, s, z, c, dz i zamienia je odpowiednio na głoski: j, p, b, t, d, ś, ź, ć, dź",
-        "ubezdźwięcznia głoski dźwięczne (np. zamiast woda mówi fota)",
-        "układa język między zębami podczas wymawiania głosek: l, t, d, n, ś, ź, ć, dź, s, z, c, dz",
-        "ma niepłynność mowy",
-      ],
-    },
-    {
-      age: "5 lat",
-      symptoms: [
-        "nie wymawia głosek sz, ż, cz, dż",
-        "głoskę r zamienia na j,ł bądź wymawia ją gardłowo",
-        "układa język między zębami (jak u 4-latka) + przy sz, ż, cz, dż",
-        "nadmiernie upraszcza, skraca lub przestawia sylaby w wyrazie",
-        "nie rozumie i nie posługuje się wyrażeniami przyimkowymi",
-        "nie buduje dłuższych wypowiedzi",
-        "ma niepłynność mowy",
-      ],
-    },
-  ];
+  const [ageGroups, setAgeGroups] = useState<SanityDocument[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const POSTS_QUERY = `*[_type=="logopedia"]|order(age)`;
+      const options = { next: { revalidate: 30 } };
+      const data = await client.fetch<SanityDocument[]>(
+        POSTS_QUERY,
+        {},
+        options
+      );
+      setAgeGroups(data);
+    };
+    fetchPosts();
+  }, []);
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -107,13 +81,13 @@ export default async function Page() {
             A więc Rodzicu zgłoś się do specjalisty, jeśli Twoje Dziecko:
           </h2>
           <div className="space-y-8">
-            {ageGroups.map((group, index) => (
-              <div key={index} className="bg-blue-50 p-6 rounded-lg">
+            {ageGroups.map((group) => (
+              <div key={group._id} className="bg-blue-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-blue-900 mb-4">
                   W wieku {group.age}:
                 </h3>
                 <ul className="space-y-3">
-                  {group.symptoms.map((symptom, idx) => (
+                  {group.symptoms.map((symptom: string, idx: number) => (
                     <li
                       key={idx}
                       className="flex items-start gap-3 text-gray-700"
