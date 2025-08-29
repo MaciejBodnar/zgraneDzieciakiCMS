@@ -28,7 +28,6 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
-  const [isAnyDropdownOpen, setIsAnyDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,11 +88,7 @@ const Navbar = () => {
                 Strona główna
               </Link>
 
-              <div
-                className="relative group flex flex-col items-center"
-                onMouseEnter={() => setIsAnyDropdownOpen(true)}
-                onMouseLeave={() => setIsAnyDropdownOpen(false)}
-              >
+              <div className="relative group flex flex-col items-center">
                 <Link
                   href="/o-nas"
                   className={`text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center gap-1 ${
@@ -117,11 +112,7 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <div
-                className="relative group flex flex-col items-center"
-                onMouseEnter={() => setIsAnyDropdownOpen(true)}
-                onMouseLeave={() => setIsAnyDropdownOpen(false)}
-              >
+              <div className="relative group flex flex-col items-center">
                 <Link
                   href="/oferta"
                   className={`text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center gap-1 ${

@@ -1,12 +1,11 @@
-import { FaShieldAlt } from 'react-icons/fa';
+import { FaShieldAlt } from "react-icons/fa";
 
 interface HeadingProps {
   title?: string;
   content?: string;
-  children?: React.ReactNode;
 }
 
-export const Heading = ({ title, content, children }: HeadingProps) => {
+export const Heading = ({ title, content }: HeadingProps) => {
   return (
     <>
       <div className="bg-blue-500 text-white px-6 py-8 text-center">

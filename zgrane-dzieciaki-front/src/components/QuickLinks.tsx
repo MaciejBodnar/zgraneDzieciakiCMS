@@ -4,16 +4,10 @@ import { ReactNode } from "react";
 interface QuickLinksProps {
   href?: string;
   title?: string;
-  description?: string;
   icon?: ReactNode;
 }
 
-export const QuickLinks = ({
-  href,
-  title,
-  description,
-  icon,
-}: QuickLinksProps) => {
+export const QuickLinks = ({ href, title, icon }: QuickLinksProps) => {
   return (
     <Link
       href={href ?? ""}

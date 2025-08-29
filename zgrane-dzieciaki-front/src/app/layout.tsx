@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FaChevronRight } from "react-icons/fa";
-import { Main } from "@/components/Main";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 
 const geistSans = Geist({
@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Main />
+        <ScrollToTop />
         <div className="pt-22">
           <Breadcrumbs
             homeElement={"Home"}
