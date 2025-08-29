@@ -30,7 +30,6 @@ export const useAutoplay = (
   );
 
   const toggleAutoplay = useCallback(() => {
-    console.log("toggle", emblaApi);
     const autoplay = emblaApi?.plugins()?.autoplay;
     if (!autoplay) return;
 

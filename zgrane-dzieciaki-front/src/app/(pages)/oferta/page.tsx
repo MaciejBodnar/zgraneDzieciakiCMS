@@ -2,6 +2,7 @@ import { Box } from "@/components/Box";
 import { HeroBanner } from "@/components/HeroBanner";
 import { FaCalendarAlt, FaHandHoldingHeart, FaPhoneAlt } from "react-icons/fa";
 import farbaImage from "../../../assets/Farba.jpg";
+import Link from "next/link";
 
 export default async function Page() {
   return (
@@ -10,9 +11,6 @@ export default async function Page() {
         image={farbaImage}
         title="Oferta"
         subtitle="Profesjonalna pomoc dla Twojego dziecka"
-        color={
-          "bg-gradient-to-t from-pink-500/50 to-transparent border-2 border-pink-200"
-        }
       />
 
       <Box className="mb-12 bg-gradient-to-r from-blue-500 to-blue-600 text-white transform hover:scale-[1.02] transition-transform">
@@ -88,14 +86,14 @@ export default async function Page() {
       </Box>
 
       <div className="text-center bg-blue-50 p-8 rounded-xl transform hover:scale-[1.02] transition-transform">
-        <a href="/oferta/cennik">
+        <Link href="/oferta/cennik">
           <h2 className="text-3xl font-bold text-blue-600 mb-4">
             Zapraszamy do zapoznania się z naszą ofertą!
           </h2>
           <p className="text-gray-600">
             Pomożemy Twojemu dziecku rozwinąć jego potencjał
           </p>
-        </a>
+        </Link>
       </div>
     </div>
   );
