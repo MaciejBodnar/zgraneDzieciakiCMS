@@ -2,7 +2,6 @@ import Image from "next/image";
 import mapImage from "../../../assets/Mapa.png";
 import { QuickInfoBanner } from "@/components/QuickInfoBanner";
 import {
-  FaChevronRight,
   FaDirections,
   FaEnvelope,
   FaMapMarkerAlt,
@@ -10,7 +9,7 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { Container } from "@/components/MapContainer";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
+
 import ContactForm from "@/components/ContactForm";
 
 export default async function Page() {
@@ -53,7 +52,7 @@ export default async function Page() {
         <>
           Julitta Janiak
           <br />
-          Nr konta: XX XXXX XXXX XXXX XXXX XXXX XXXX
+          Nr konta: 82 1160 2202 0000 0003 8531 8733
         </>
       ),
       icon: <FaMoneyBillWave className="text-blue-500 text-xl mt-1" />,
