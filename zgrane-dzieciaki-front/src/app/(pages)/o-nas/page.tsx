@@ -1,89 +1,104 @@
-import { HeroBanner } from "@/components/HeroBanner";
+"use client";
 import puzzleImage from "../../../assets/Puzzle.jpg";
 import { FaListUl, FaUserMd, FaUsers } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/client";
+import { SanityDocument } from "next-sanity";
+import Image from "next/image";
 
-export default async function Page() {
-  const services = [
-    "Diagnoza i terapia integracji sensorycznej",
-    "Konsultacja, diagnoza i terapia logopedyczna",
-    "Terapia Ręki",
-    "Konsultacja psychologiczna",
-    "Trening Umiejętności Społecznych",
-    "Aktywny trening słuchowy Neuroflow",
-    "Terapia pedagogiczna",
-    "Korektywa i kompensacja wad postawy",
-  ];
+export default function Page() {
+  // const team = [
+  //   {
+  //     name: "Julitta Janiak",
+  //     roles: [
+  //       "pedagog",
+  //       "terapeuta integracji sensorycznej",
+  //       "terapeuta met. Warnkego",
+  //       "provider Neuroflow",
+  //     ],
+  //   },
+  //   {
+  //     name: "Anna Krasnodębska",
+  //     roles: [
+  //       "oligofrenopedagog",
+  //       "terapeuta integracji sensorycznej",
+  //       "terapeuta TUS",
+  //     ],
+  //   },
+  //   {
+  //     name: "Justyna Adamczyk",
+  //     roles: [
+  //       "pedagog specjalny",
+  //       "neurobiolog",
+  //       "terapeuta integracji sensorycznej",
+  //     ],
+  //   },
+  //   {
+  //     name: "Anna Gajowiec",
+  //     roles: [
+  //       "fizjoterapeuta",
+  //       "terapeuta integracji sensorycznej",
+  //       "instruktor korektywy",
+  //     ],
+  //   },
+  //   {
+  //     name: "Martyna Masiulaniec",
+  //     roles: ["pedagog", "terapeuta integracji sensorycznej"],
+  //   },
+  //   {
+  //     name: "Magdalena Raczyńska",
+  //     roles: ["pedagog", "terapeuta ręki i logopeda", "terapia pedagogiczna"],
+  //   },
+  //   {
+  //     name: "Monika Murawiecka",
+  //     roles: ["pedagog", "logopeda"],
+  //   },
+  //   {
+  //     name: "Anna Żmijewska",
+  //     roles: ["pedagog", "terapia pedagogiczna"],
+  //   },
+  //   {
+  //     name: "Rafał Sawicki",
+  //     roles: ["psycholog", "terapeuta TUS"],
+  //   },
+  // ];
 
-  const team = [
-    {
-      name: "Julitta Janiak",
-      roles: [
-        "pedagog",
-        "terapeuta integracji sensorycznej",
-        "terapeuta met. Warnkego",
-        "provider Neuroflow",
-      ],
-    },
-    {
-      name: "Anna Krasnodębska",
-      roles: [
-        "oligofrenopedagog",
-        "terapeuta integracji sensorycznej",
-        "terapeuta TUS",
-      ],
-    },
-    {
-      name: "Justyna Adamczyk",
-      roles: [
-        "pedagog specjalny",
-        "neurobiolog",
-        "terapeuta integracji sensorycznej",
-      ],
-    },
-    {
-      name: "Anna Gajowiec",
-      roles: [
-        "fizjoterapeuta",
-        "terapeuta integracji sensorycznej",
-        "instruktor korektywy",
-      ],
-    },
-    {
-      name: "Martyna Masiulaniec",
-      roles: ["pedagog", "terapeuta integracji sensorycznej"],
-    },
-    {
-      name: "Magdalena Raczyńska",
-      roles: ["pedagog", "terapeuta ręki i logopeda", "terapia pedagogiczna"],
-    },
-    {
-      name: "Monika Murawiecka",
-      roles: ["pedagog", "logopeda"],
-    },
-    {
-      name: "Anna Żmijewska",
-      roles: ["pedagog", "terapia pedagogiczna"],
-    },
-    {
-      name: "Rafał Sawicki",
-      roles: ["psycholog", "terapeuta TUS"],
-    },
-  ];
+  const [services, setServices] = useState<SanityDocument[]>([]);
+  const [team, setTeam] = useState<SanityDocument[]>([]);
 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const POSTS_QUERY = `*[_type=="about-services"]`;
+      const POSTS_QUERY_TEAM = `*[_type=="about-team"]`;
+      const options = { next: { revalidate: 30 } };
+      const data = await client.fetch<SanityDocument[]>(
+        POSTS_QUERY,
+        {},
+        options
+      );
+      const teamData = await client.fetch<SanityDocument[]>(
+        POSTS_QUERY_TEAM,
+        {},
+        options
+      );
+      setServices(data);
+      setTeam(teamData);
+    };
+    fetchPosts();
+  }, []);
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Hero Image */}
-      <HeroBanner
-        title=""
-        image={puzzleImage}
-        color={"bg-gradient-to-t from-gray-500/80 to-transparent"}
-      />
-
-      {/* About Section */}
       <section className="mb-16">
         <h1 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
           <FaUserMd className="text-blue-500" />O NAS
         </h1>
+        <Image
+          src={puzzleImage}
+          alt=""
+          className="w-full h-[200px] object-contain"
+          width={500}
+          height={200}
+        />
         <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
           <p className="text-gray-600 leading-relaxed mb-8">
             Witamy na stronie Centrum Rozwoju Dziecka Zgrane Dzieciaki w Ząbkach
@@ -103,10 +118,13 @@ export default async function Page() {
         </h2>
         <div className="bg-white rounded-lg shadow-md p-6 md:p-8">
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {services.map((service, index) => (
-              <li key={index} className="flex items-center gap-2 text-gray-600">
+            {services.map((service) => (
+              <li
+                key={service._id}
+                className="flex items-center gap-2 text-gray-600"
+              >
                 <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                {service}
+                {service.title}
               </li>
             ))}
           </ul>
@@ -120,16 +138,16 @@ export default async function Page() {
           NASZ ZESPÓŁ
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {team.map((member, index) => (
+          {team.map((member) => (
             <div
-              key={index}
+              key={member._id}
               className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
             >
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 {member.name}
               </h3>
               <ul className="space-y-1">
-                {member.roles.map((role, roleIndex) => (
+                {member.roles.map((role: string, roleIndex: number) => (
                   <li
                     key={roleIndex}
                     className="text-gray-600 text-sm flex items-center gap-2"
