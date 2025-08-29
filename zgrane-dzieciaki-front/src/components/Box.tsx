@@ -16,7 +16,7 @@ export const Box = ({
   return (
     <a href={url}>
       <div
-        className={`${padding} ${backgroundColor} rounded-lg shadow-md ${className}`}
+        className={`${padding} ${backgroundColor} max-h-fit rounded-lg shadow-md ${className}`}
       >
         {children}
       </div>

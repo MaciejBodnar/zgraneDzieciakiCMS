@@ -14,6 +14,7 @@ import tus from "../../assets/Tus.png";
 import logopeda from "../../assets/Logopeda.png";
 import korektywa from "../../assets/Korektywa.png";
 import Link from "next/link";
+import Image from "next/image";
 
 type PropType = {
   slides: number[];
@@ -21,13 +22,11 @@ type PropType = {
 };
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+  const { options } = props;
   const progressNode = useRef<HTMLDivElement>({} as HTMLDivElement);
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     Autoplay({ playOnInit: false, delay: 5000 }),
   ]);
-
-  console.log("tutaj check:", progressNode);
 
   const {
     prevBtnDisabled,
@@ -99,57 +98,28 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__container">
           {slidesInfo.map((slide, index) => (
             <div key={index} className="relative embla__slide">
-              <Link href={slide.buttonLink} className="block">
-                <div className="flex flex-col md:grid md:grid-cols-2 min-h-[600px] gap-0 group cursor-pointer">
-                  {/* Image Section */}
-                  <div className="relative h-[300px] md:h-full order-1 md:order-2 overflow-hidden">
-                    {slide.image ? (
-                      <div
-                        className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
-                        style={{
-                          backgroundImage: `url(${slide.image})`,
-                          backgroundSize: "contain",
-                          backgroundPosition: "center",
-                          backgroundRepeat: "no-repeat",
-                        }}
-                      >
-                        <div
-                          className={`absolute inset-0 bg-gradient-to-r ${slide.color} opacity-10`}
-                        />
-                      </div>
-                    ) : (
-                      <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-                        <span className="text-gray-400 text-lg">
-                          Image {index + 1}
-                        </span>
-                      </div>
-                    )}
-                  </div>
+              <Link href={slide.buttonLink} className="rounded-2xl">
+                <div className="flex flex-col group cursor-pointer rounded-2xl w-full">
+                  <Image
+                    alt=""
+                    width={500}
+                    height={500}
+                    src={slide.image}
+                    className="w-full group-hover:shadow-lg"
+                  />
 
-                  <div className="flex flex-col justify-center px-8 md:px-16 lg:px-24 py-12 md:py-16 bg-white order-2 md:order-1 relative overflow-hidden">
-                    <div className="absolute inset-0 opacity-5">
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${slide.color}`}
-                      />
-                    </div>
-
-                    <div className="relative z-10">
-                      <h2
-                        className={`text-4xl md:text-5xl font-bold mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r ${slide.color}`}
-                      >
-                        {slide.title}
-                      </h2>
-                      <p className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">
-                        {slide.description}
-                      </p>
-                      <div className="relative inline-block">
-                        <button
-                          className={`${slide.buttonStyle} px-8 py-4 rounded-lg transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg text-lg font-semibold`}
-                        >
-                          {slide.buttonText}
-                        </button>
-                      </div>
-                    </div>
+                  <div className="group-hover:shadow-lg flex flex-col justify-center px-4 md:px-6 lg:p-8 bg-gray-100 rounded-b-2xl order-2 md:order-1 relative">
+                    <h2 className="text-xl md:text-2xl uppercase font-bold mb-2 md:mb-6">
+                      {slide.title}
+                    </h2>
+                    <p className="text-base md:text-lg text-gray-600 mb-10 leading-relaxed">
+                      {slide.description}
+                    </p>
+                    <button
+                      className={`${slide.buttonStyle} px-3 py-2 rounded-lg transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg text-lg font-semibold`}
+                    >
+                      {slide.buttonText}
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -181,12 +151,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <button
           className="embla__play"
           onClick={() => {
-            console.log("button clicked");
             toggleAutoplay();
           }}
           type="button"
         >
-          {autoplayIsPlaying ? <FaPause /> : <FaPlay />}
+          {autoplayIsPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
         </button>
       </div>
     </div>

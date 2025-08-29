@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Main />
-        <div className="pt-26">
+        <div className="pt-22">
           <Breadcrumbs
             homeElement={"Home"}
             separator={

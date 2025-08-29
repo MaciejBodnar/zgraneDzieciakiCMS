@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { Container } from "@/components/MapContainer";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import ContactForm from "@/components/ContactForm";
 
 export default async function Page() {
   const contentItems = [
@@ -83,6 +84,7 @@ export default async function Page() {
           title="Jak do nas trafić?"
         />
       </div>
+      <ContactForm />
       <Container />
     </div>
   );

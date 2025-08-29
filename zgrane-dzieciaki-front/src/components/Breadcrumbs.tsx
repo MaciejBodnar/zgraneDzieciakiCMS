@@ -78,10 +78,12 @@ export const Breadcrumbs = ({
 
   return (
     <div>
-      <ul className="bg-gray-100 py-2 px-6 rounded-md max-w-6xl mx-auto flex items-center flex-wrap text-xl">
-        <li className="text-gray-600 hover:text-blue-500">
-          <Link href={"/"}>{homeElement}</Link>
-        </li>
+      <ul className="py-2 px-6 uppercase rounded-md max-w-6xl mx-auto flex items-center flex-wrap text-lg">
+        {pathNames.length > 0 && separator && (
+          <li className="text-gray-600 hover:text-blue-500">
+            <Link href={"/"}>{homeElement}</Link>
+          </li>
+        )}
         {pathNames.length > 0 && separator}
         {pathNames.map((link, index) => {
           const last = index === pathNames.length - 1;
